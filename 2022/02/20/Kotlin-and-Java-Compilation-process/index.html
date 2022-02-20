@@ -32,7 +32,8 @@ gtag('config', 'xx-xxxxxxx-xx');</script><link rel="stylesheet" href="/css/tocbo
 <blockquote>
 <p>Kotlin是一種在Java虛擬機(JVM)上執行的靜態型別程式語言，它主要是由俄羅斯聖彼得堡的JetBrains開發團隊所發展出來的程式語言，其名稱來自於聖彼得堡附近的科特林島。雖然與Java語法並不相容，但在JVM環境中Kotlin被設計成可以和Java程式碼相互運作，並可以重複使用如Java集合框架等的現有Java參照的函式庫。</p>
 </blockquote>
-<h2 id="Kotlin跟Java的關係："><a href="#Kotlin跟Java的關係：" class="headerlink" title="Kotlin跟Java的關係："></a>Kotlin跟Java的關係：</h2><p>Kotlin compiler會生成byte code，然後byte code run在Java virtual machine時會將byte code轉成machine code。</p>
+<h2 id="Kotlin跟Java的關係："><a href="#Kotlin跟Java的關係：" class="headerlink" title="Kotlin跟Java的關係："></a>Kotlin跟Java的關係：</h2><h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>Java 可以跨平台執行，就是因為有JVM的存在，只要任何平台有JVM，那就可以執行Java！</p>
+<h3 id="Kotlin與Java"><a href="#Kotlin與Java" class="headerlink" title="Kotlin與Java"></a>Kotlin與Java</h3><p>Kotlin compiler compile後會生成byte code，然後byte code run在Java virtual machine(JVM)時會將byte code轉成machine code。</p>
 <p>java的運作也一樣，java compiler將.java檔案轉成byte code，而kotlin則是.kt的檔案，被compiler compile後會產生.class檔案，.class檔案contain byte code。<br><img src="https://i.imgur.com/YoWyEQe.png"><br><img src="https://i0.wp.com/developersbreach.com/wp-content/uploads/2021/03/kotlin_interoperability_banner.png?resize=640,360&ssl=1"></p>
 <p>也正因為會先compile成byte code並執行在JVM，所以Kotlin也支援Multiplatform，像是有：<br>    1. Server side<br>    2. Android / IOS<br>    3. JavaScript<br>    4. Native<br>    5. Data Science</p>
 <h2 id="在Android中的Kotlin與Java的關係"><a href="#在Android中的Kotlin與Java的關係" class="headerlink" title="在Android中的Kotlin與Java的關係"></a>在Android中的Kotlin與Java的關係</h2><p>最大的不同就是在Android的compile過程中，Android並不是work with JVM，而是work with另外兩種virtual machines：</p>
