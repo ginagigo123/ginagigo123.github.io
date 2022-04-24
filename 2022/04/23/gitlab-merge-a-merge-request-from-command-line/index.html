@@ -28,33 +28,33 @@ gtag('config', 'xx-xxxxxxx-xx');</script><link rel="stylesheet" href="/css/tocbo
     orderedList: false,
     collapseDepth: 2,
   });
-})</script><link rel="preload" href="https://cdn.bootcss.com/highlight.js/9.6.0/styles/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.6.0/styles/github.min.css"><link rel="preload" href="https://fonts.googleapis.com/css?family=Abril+Fatface&amp;display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface&amp;display=swap"><meta name="generator" content="Hexo 5.4.0"></head><body><div class="mask-border"></div><div class="head"><div class="head__inner"><h1><a href="/">Ginagigo</a></h1><p>Work Hard, Play Hard</p></div></div><div class="paper-container"><div class="main"><div class="location-bar"><div class="line-1"><div class="horizontal-line" style="height: 3px"></div></div><div class="line-2"><div class="horizontal-line" style="height: 1px"></div></div><p class="text">Merge a Merge Request with API in GitLab</p><div class="switch-button"><input class="container_toggle" type="checkbox" id="switch" name="mode"><label for="switch">Toggle</label></div><div class="line-3"><div class="horizontal-line" style="height: 1px"></div></div></div><div class="main__2-col"><article class="post-view__article"><div class="article__infomation"><div class="posts-item"><h2 class="posts-item__title"><a href="">Merge a Merge Request with API in GitLab</a></h2><span class="post__date">2022-04-23</span><a href="/tags/git/"><span class="post__tags">#git</span></a></div></div><div class="article__content"><h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><p>會有這個需求是因為最近在當助教，過去設定作業的繳交方式是，每個學生都需要先將作業fork過去，並且使用merge request來交作業到自己的branch，那在之前聽說都是手動將 merge request merge起來，並且需要檢查學生是否有交對branch &amp; 是否有commit，並且去每個merge request裏頭按下merge！</p>
+})</script><link rel="preload" href="https://cdn.bootcss.com/highlight.js/9.6.0/styles/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.6.0/styles/github.min.css"><link rel="preload" href="https://fonts.googleapis.com/css?family=Abril+Fatface&amp;display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface&amp;display=swap"><meta name="generator" content="Hexo 5.4.0"></head><body><div class="mask-border"></div><div class="head"><div class="head__inner"><h1><a href="/">Ginagigo</a></h1><p>Work Hard, Play Hard</p></div></div><div class="paper-container"><div class="main"><div class="location-bar"><div class="line-1"><div class="horizontal-line" style="height: 3px"></div></div><div class="line-2"><div class="horizontal-line" style="height: 1px"></div></div><p class="text">Merge a Merge Request with API in GitLab</p><div class="switch-button"><input class="container_toggle" type="checkbox" id="switch" name="mode"><label for="switch">Toggle</label></div><div class="line-3"><div class="horizontal-line" style="height: 1px"></div></div></div><div class="main__2-col"><article class="post-view__article"><div class="article__infomation"><div class="posts-item"><h2 class="posts-item__title"><a href="">Merge a Merge Request with API in GitLab</a></h2><span class="post__date">2022-04-23</span><a href="/tags/git/"><span class="post__tags">#git</span></a></div></div><div class="article__content"><h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><p>會有這個需求是因為最近在當助教，這堂課上過去繳交作業的方式是：「每個學生都需要先將作業fork，並且使用merge request來交作業到自己的branch」，那在之前都是使用手動將 merge request merge起來，並且需要檢查學生是否有交對branch &amp; 是否有commit，再去每個學生的merge request裏頭按下merge按鈕！</p>
 <p><img src="/images/merge_request.png"></p>
-<p>但是學生有100多個，那勢必要手動檢查每個merge request是很費時的 QQ !!! 所以我研究了一下發現可以透過 command line / call API 的方式去merge !</p>
-<h2 id="In-Github"><a href="#In-Github" class="headerlink" title="In Github"></a>In Github</h2><p>如果是在 Github 上面，需要下載 <code>gh</code>，會有 pull requests 跟 issue 等的資訊，也就可以使用 command line 去 merge pull request了，<a target="_blank" rel="noopener" href="https://github.com/cli/cli#installation">Github repo-gh</a>，也可以參考<a target="_blank" rel="noopener" href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/merging-a-pull-request">這個資料</a>。</p>
+<p>但是學生有100多個，那勢必手動檢查每個merge request是很費時的 QQ !!! 所以我研究了一下發現可以透過 command line / call API 的方式去merge !</p>
+<h2 id="In-Github"><a href="#In-Github" class="headerlink" title="In Github"></a>In Github</h2><p>如果是在 Github 上面，需要下載 <code>gh</code>，會有 pull requests 跟 issue 等的資訊，可以使用 command line 去 merge pull request了，<a target="_blank" rel="noopener" href="https://github.com/cli/cli#installation">Github repo-gh</a>，也可以參考<a target="_blank" rel="noopener" href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/merging-a-pull-request">這個資料</a> ( P.S 在 Github 上是 pull request，而在 GitLab 上叫做 merge request )。</p>
 <h2 id="In-GitLab"><a href="#In-GitLab" class="headerlink" title="In GitLab"></a>In GitLab</h2><p>如果是在 GitLab 上面的話，只需要透過 call GitLab API 就可以達成了 !! <a target="_blank" rel="noopener" href="https://docs.gitlab.com/ee/api/">GitLab API</a> 有提供三種方式，分別是</p>
 <ol>
 <li>REST API</li>
 <li>SCIM API</li>
 <li>GraphQL API</li>
 </ol>
-<p>我後來選擇使用的是第一種，因為較熟悉 ～</p>
-<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用 !"></a>如何使用 !</h2><p>我們要使用 API ，要記得看他的 version 版本號，現在 GitLab 的 api version 是 4，defined在 <a target="_blank" rel="noopener" href="https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/api/api.rb"><code>lib/api.rb</code></a>，root 路徑就是 <code>/api/v4</code></p>
-<p>像是以下的例子，會列出在所有的repo：</p>
+<p>我後來選擇使用的是第一種，因為較為熟悉 ～</p>
+<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用 !"></a>如何使用 !</h2><p>我們要使用 API ，先看目前發行的 version 版本號，現在 GitLab 的 api version 是 4，defined在 <a target="_blank" rel="noopener" href="https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/api/api.rb"><code>lib/api.rb</code></a>，root 路徑就是 <code>/api/v4</code></p>
+<p>像是以下例子，會列出所有的repo：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl &quot;https://gitlab.example.com/api/v4/projects&quot;</span><br></pre></td></tr></table></figure>
-<p>API 會回傳 Json 格式的資料，如果是在 GitLab 上面的話就將 <code>gitlab.example.com</code> 改成 <code>gitlab.com</code>，如果是自行架設 GitLab Server 的話，就是把 <code>gitlab.example.com</code> 改成自己的網址，不過這邊有一點需要注意的就是會需要提供 key，也就是 <a target="_blank" rel="noopener" href="https://docs.gitlab.com/ee/api/#authentication">Authentication</a> 的部分。</p>
+<p>API 會回傳 <strong>Json</strong> 格式的資料，如果是在 GitLab 上面的話就將 <code>gitlab.example.com</code> 改成 <code>gitlab.com</code>，如果是自行架設 GitLab Server 的話，就是把 <code>gitlab.example.com</code> 改成自己的網址，不過這邊有一點需要注意的是會需要提供 <strong>key</strong> 去 <a target="_blank" rel="noopener" href="https://docs.gitlab.com/ee/api/#authentication">認證身份</a>。</p>
 <h3 id="認證方式"><a href="#認證方式" class="headerlink" title="認證方式"></a>認證方式</h3><p>有五種認證的方式，我使用的是第二種：</p>
 <ol>
 <li>OAuth2 tokens</li>
-<li>Personal access tokens</li>
+<li><strong>Personal access tokens</strong></li>
 <li>Project access tokens</li>
 <li>Session cookie</li>
 <li>GitLab CI/CD job token (Specific endpoints only)</li>
 </ol>
 <p>Personal Access tokens，可以透過點擊自己的頭像，找到 <code>Access Token</code>，點選Scope: <code>api</code> 就會拿到自己的 token 了！<br><img src="/images/gitlab_token.png"></p>
-<p>將這個 token 傳入你要 call 的 api 中，這邊是使用參數傳入，不過 GitLab 也有提供其他方式：</p>
+<p>將這個 token 傳入你要 call 的 api 中，這邊是使用參數傳入，GitLab 也有提供其他方式：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl &quot;https://gitlab.example.com/api/v4/projects?private_token=&lt;your_access_token&gt;&quot;</span><br></pre></td></tr></table></figure>
-<p>是不是其實很簡單就可以拿到 GitLab 上面的 data 了呢 !!<br>然後要記得使用 api 都要傳入這個token ! 不然會回傳 400 開頭 或是 404 的 error status code!</p>
+<p>是不是其實很簡單，就可以拿到 GitLab 上面的 data 了呢 !!<br>然後要記得使用 api 都要傳入這個token ! 不然會回傳 400 開頭 或是 404 的 error status code!</p>
 <h3 id="可以取得的資源"><a href="#可以取得的資源" class="headerlink" title="可以取得的資源"></a><a target="_blank" rel="noopener" href="https://docs.gitlab.com/ee/api/api_resources.html">可以取得的資源</a></h3><ol>
 <li><a target="_blank" rel="noopener" href="https://docs.gitlab.com/ee/api/api_resources.html#project-resources">Projects.</a></li>
 <li><a target="_blank" rel="noopener" href="https://docs.gitlab.com/ee/api/api_resources.html#group-resources">Groups.</a></li>
